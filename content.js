@@ -10,21 +10,28 @@ console.log("Stylesheet pushed");
 }
 }
 
-
-
+for (let z = 0; z < frames.length; z++) {
+let iFrame = frames[z];
 for (let i = 0; i < testing.length; i++) {
 let link = document.createElement("link");
   link.href = testing[i];
   link.rel = "stylesheet";
   link.type = "text/css";
   link.id = "extension";
-  frames[0].document.head.appendChild(link);
+  iFrame.document.head.appendChild(link);
+  console.log("Stylesheet Automatically Added");
 }
+}
+//End of fixCss
 }
 
 
 function loadCSS(css) {
-  frames[0].document.head.appendChild(css);
+  for (let z = 0; z < frames.length; z++) {
+  let iFrame = frames[z];
+  iFrame.document.head.appendChild(css);
+  console.log("Stylesheet Manually Added");
+}
 }
 
 function unloadCSS() {
