@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clarity Stylesheet Fixer</title>
+    <script src="popup.js"></script>
+    <link rel="stylesheet" href="popup.css"></link>
+  </head>
+  <body>
+    <div class="popup">
+      <div>Type or Paste in stylesheet url</div>
+      <div class="input">
+        <input type="text" name="cssUrl" id="imgCssInput" autocomplete="off" required/>
+        <label for="cssUrl" class="label-name">
+            <span class="content-name">URL</span>
+        </label>
+      </div>
+      <div class="buttons">
+        <button type="submit" class="button" id="clear">Reset</button>
+        <button type="submit" class="button" id="auto">Auto Fix</button>
+        <button type="submit" class="button" id="submit">Add CSS URL</button>
+      </div>
+    </div>
+  </body>
+</html>

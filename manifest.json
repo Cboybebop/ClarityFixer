@@ -1,0 +1,35 @@
+{
+  "manifest_version": 2,
+  "name": "MSClarity CSS Fixer",
+  "description": "Attempts to fix broken stylesheets on Microsoft's Clarity product",
+  "version": "1.0.0",
+  "author": "John Markey",
+  "icons": {
+    "16": "./images/background16.png",
+    "48": "./images/background48.png",
+    "128": "./images/background128.png"
+  },
+  "page_action": {
+    "default_icon": "./images/background16.png",
+    "default_popup": "popup.html",
+    "default_title": "Custom Stylesheet"
+  },
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://clarity.microsoft.com/projects/view/*"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "https://clarity.microsoft.com/projects/view/*",
+    "declarativeContent",
+    "storage",
+    "notifications",
+    "webNavigation"
+  ]
+}
