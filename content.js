@@ -1,4 +1,5 @@
 function fixCss(){
+setTimeout(function() {
   var test = document.querySelectorAll('iframe')[0].contentDocument.styleSheets;
 var testing =[];
 
@@ -10,28 +11,22 @@ console.log("Stylesheet pushed");
 }
 }
 
-for (let z = 0; z < frames.length; z++) {
-let iFrame = frames[z];
 for (let i = 0; i < testing.length; i++) {
 let link = document.createElement("link");
   link.href = testing[i];
   link.rel = "stylesheet";
   link.type = "text/css";
   link.id = "extension";
-  iFrame.document.head.appendChild(link);
-  console.log("Stylesheet Automatically Added");
+  frames[0].document.head.appendChild(link);
+  console.log("Stylesheet linked");
 }
-}
+}, 500);
 //End of fixCss
 }
 
 
 function loadCSS(css) {
-  for (let z = 0; z < frames.length; z++) {
-  let iFrame = frames[z];
-  iFrame.document.head.appendChild(css);
-  console.log("Stylesheet Manually Added");
-}
+  frames[0].document.head.appendChild(css);
 }
 
 function unloadCSS() {
@@ -59,7 +54,19 @@ chrome.runtime.onMessage.addListener((req, p1, p2) => {
    });
  } else if (req.cmd === "fixCss") {
 //Attempt autofix
-    fixCss();
+// Recordings
+if (window.location.href.indexOf("impressions") > -1) {
+document.getElementById("clarity-snapshot-iframe").addEventListener("load", fixCss);
+fixCss();
+console.log("Attempted recording fix");
+} else if (window.location.href.indexOf("heatmaps") > -1) {
+  const buttons = document.querySelectorAll('.ms-Button')
+buttons.forEach(function(crntBtn){
+  crntBtn.addEventListener('click', fixCss)
+})
+  fixCss();
+  console.log("Attempted heatmap fix");
+} else {fixCss();}
   }
 });
 
